@@ -2,19 +2,24 @@ package com.bifunction.ppmtool.domain;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-// defines an entity object sho that we can create a table with attributes
+// defines an entity object so that we can create a table with attributes
 @Entity
 public class Project {
 
@@ -36,9 +41,24 @@ public class Project {
 	private Date end_date;
 	
 	@JsonFormat(pattern="yyyy-mm-dd")
+	@Column(updatable=false)
 	private Date created_Date;
 	@JsonFormat(pattern="yyyy-mm-dd")
 	private Date updated_Date;
+	
+	// When we load a project object then the back information is available
+	// CascadeType.ALL : the project is the owner side of relationship
+	// meaning that if I delete the project then everything that's a child to the project should be deleted
+	@OneToOne(fetch= FetchType.EAGER, cascade=CascadeType.ALL, mappedBy = "project")
+	@JsonIgnore  // I don't need to get backlog there
+	private Backlog backlog;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private User user;
+
+
+ private String projectLeader;
 	
 	public Long getId() {
 		return id;
@@ -103,6 +123,23 @@ public class Project {
 	public void setUpdated_Date(Date updated_Date) {
 		this.updated_Date = updated_Date;
 	}
+	
+
+	public Backlog getBacklog() {
+		return backlog;
+	}
+
+	public void setBacklog(Backlog backlog) {
+		this.backlog = backlog;
+	}
+	
+    public String getProjectLeader() {
+        return projectLeader;
+    }
+
+    public void setProjectLeader(String projectLeader) {
+        this.projectLeader = projectLeader;
+    }
 
 	// every time we created a new object 
 	@PrePersist

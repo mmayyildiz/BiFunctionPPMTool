@@ -14,10 +14,10 @@
 
     <link rel="stylesheet" href="App.css">
 
-    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
-        crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+        crossorigin="anonymous">
 
-    <title>PPM Tool</title>
+    <title>Kanban Tool</title>
 </head>
 <!-- Spring Boot / React Students please ignore above -->
 
@@ -27,17 +27,17 @@
     <!-- NavBar Component Code -->
     <nav class="navbar navbar-expand-sm navbar-dark bg-primary mb-4">
         <div class="container">
-            <a class="navbar-brand" href="/Dashboard.html">
+            <a class="navbar-brand" href="Dashboard.html">
                 Personal Kanban Tool
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
-
+                <span class="navbar-toggler-icon" />
             </button>
 
             <div class="collapse navbar-collapse" id="mobile-nav">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/Dashboard.html">
+                        <a class="nav-link" href="/dashboard">
                             Dashboard
                         </a>
                     </li>
@@ -59,44 +59,73 @@
         </div>
     </nav>
 
-    <!-- Start of Project FORM -->
-
-    <div class="project">
+    <!-- Project Board Starts Here MIND OTHER COMPONENTS WHEN COPY AND PASTING -->
+    <div class="container">
+        <a href=# class="btn btn-primary mb-3">
+            <i class="fas fa-plus-circle"> Create Project Task</i>
+        </a>
+        <br />
+        <hr />
+        <!-- Backlog STARTS HERE -->
         <div class="container">
             <div class="row">
-                <div class="col-md-8 m-auto">
-                    <h5 class="display-4 text-center">Create / Edit Project form</h5>
-                    <hr />
-                    <form>
-                        <div class="form-group">
-                            <input type="text" class="form-control form-control-lg " placeholder="Project Name" />
+                <div class="col-md-4">
+                    <div class="card text-center mb-2">
+                        <div class="card-header bg-secondary text-white">
+                            <h3>TO DO</h3>
                         </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control form-control-lg" placeholder="Unique Project ID"
-                                disabled />
-                        </div>
-                        <!-- disabled for Edit Only!! remove "disabled" for the Create operation -->
-                        <div class="form-group">
-                            <textarea class="form-control form-control-lg" placeholder="Project Description"></textarea>
-                        </div>
-                        <h6>Start Date</h6>
-                        <div class="form-group">
-                            <input type="date" class="form-control form-control-lg" name="start_date" />
-                        </div>
-                        <h6>Estimated End Date</h6>
-                        <div class="form-group">
-                            <input type="date" class="form-control form-control-lg" name="end_date" />
-                        </div>
+                    </div>
 
-                        <input type="submit" class="btn btn-primary btn-block mt-4" />
-                    </form>
+                    <!-- SAMPLE PROJECT TASK STARTS HERE -->
+                    <div class="card mb-1 bg-light">
+
+                        <div class="card-header text-primary">
+                            ID: projectSequence -- Priority: priorityString
+                        </div>
+                        <div class="card-body bg-light">
+                            <h5 class="card-title">project_task.summary</h5>
+                            <p class="card-text text-truncate ">
+                                project_task.acceptanceCriteria
+                            </p>
+                            <a href=# class="btn btn-primary">
+                                View / Update
+                            </a>
+
+                            <button class="btn btn-danger ml-4">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- SAMPLE PROJECT TASK ENDS HERE -->
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-center mb-2">
+                        <div class="card-header bg-primary text-white">
+                            <h3>In Progress</h3>
+                        </div>
+                    </div>
+                    <!-- SAMPLE PROJECT TASK STARTS HERE -->
+
+                    <!-- SAMPLE PROJECT TASK ENDS HERE -->
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-center mb-2">
+                        <div class="card-header bg-success text-white">
+                            <h3>Done</h3>
+                        </div>
+                    </div>
+                    <!-- SAMPLE PROJECT TASK STARTS HERE -->
+
+                    <!-- SAMPLE PROJECT TASK ENDS HERE -->
                 </div>
             </div>
         </div>
+
+        <!-- Backlog ENDS HERE -->
     </div>
 
-    <!-- END OF PROJECT FORM -->
-
+    <!-- PROJECT BOARD ENDS HERE -->
     <!-- Spring Boot / React Students please ignore below -->
 
 
