@@ -57,8 +57,7 @@ public class Project {
     @JsonIgnore
     private User user;
 
-
- private String projectLeader;
+    private String projectLeader;
 	
 	public Long getId() {
 		return id;
@@ -140,6 +139,14 @@ public class Project {
     public void setProjectLeader(String projectLeader) {
         this.projectLeader = projectLeader;
     }
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	// every time we created a new object 
 	@PrePersist

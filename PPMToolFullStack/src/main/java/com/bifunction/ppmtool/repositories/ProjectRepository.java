@@ -14,5 +14,7 @@ public interface ProjectRepository extends CrudRepository<Project, Long>{
 	
 	@Override
 	Iterable<Project> findAll();
+	
+	Iterable<Project> findAllByProjectLeader(String user);
 
 }
