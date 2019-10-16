@@ -10,7 +10,7 @@ class ProjectBoard extends Component {
   constructor() {
     super();
     this.state = {
-      errors: {}
+      errors: {},
     };
   }
 
@@ -36,13 +36,19 @@ class ProjectBoard extends Component {
       if (project_tasks.length < 1) {
         if (errors.projectNotFound) {
           return (
-            <div className="alert alert-danger text-center" role="alert">
+            <div className='alert alert-danger text-center' role='alert'>
               {errors.projectNotFound}
+            </div>
+          );
+        } else if (errors.projectIdentifier) {
+          return (
+            <div className='alert alert-danger text-center' role='alert'>
+              {errors.projectIdentifier}
             </div>
           );
         } else {
           return (
-            <div className="alert alert-info text-center" role="alert">
+            <div className='alert alert-info text-center' role='alert'>
               No Project Tasks on this board
             </div>
           );
@@ -55,9 +61,9 @@ class ProjectBoard extends Component {
     BoardContent = boardAlgorithm(errors, project_tasks);
 
     return (
-      <div className="container">
-        <Link to={`/addProjectTask/${id}`} className="btn btn-primary mb-3">
-          <i className="fas fa-plus-circle"> Create Project Task</i>
+      <div className='container'>
+        <Link to={`/addProjectTask/${id}`} className='btn btn-primary mb-3'>
+          <i className='fas fa-plus-circle'> Create Project Task</i>
         </Link>
         <br />
         <hr />
@@ -70,15 +76,15 @@ class ProjectBoard extends Component {
 ProjectBoard.propTypes = {
   backlog: PropTypes.object.isRequired,
   getBacklog: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
   backlog: state.backlog,
-  errors: state.errors
+  errors: state.errors,
 });
 
 export default connect(
   mapStateToProps,
-  { getBacklog }
+  { getBacklog },
 )(ProjectBoard);

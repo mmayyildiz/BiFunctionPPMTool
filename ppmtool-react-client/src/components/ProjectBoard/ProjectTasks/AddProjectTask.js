@@ -14,26 +14,26 @@ class AddProjectTask extends Component {
       summary: "",
       acceptanceCriteria: "",
       status: "",
-      priority: "0",
+      priority: 0,
       dueDate: "",
       projectIdentifier: id,
-      errors: {}
+      errors: {},
     };
-    this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
-  // we have new props whenever we transmit about form. we need to receive
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
   }
 
+  // on change
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
-
+  //on submit
   onSubmit(e) {
     e.preventDefault();
 
@@ -42,84 +42,68 @@ class AddProjectTask extends Component {
       acceptanceCriteria: this.state.acceptanceCriteria,
       status: this.state.status,
       priority: this.state.priority,
-      dueDate: this.state.priority
+      dueDate: this.state.dueDate,
     };
 
     this.props.addProjectTask(
       this.state.projectIdentifier,
       newTask,
-      this.props.history
+      this.props.history,
     );
   }
 
   render() {
     const { id } = this.props.match.params;
-    // destructring from the state
     const { errors } = this.state;
-
     return (
-      <div className="add-PBI">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-8 m-auto">
-              <Link to={`/projectBoard/${id}`} className="btn btn-light">
+      <div className='add-PBI'>
+        <div className='container'>
+          <div className='row'>
+            <div className='col-md-8 m-auto'>
+              <Link to={`/projectBoard/${id}`} className='btn btn-light'>
                 Back to Project Board
               </Link>
-              <h4 className="display-4 text-center">Add Project Task</h4>
-              <p className="lead text-center">Project Name + Project Code</p>
+              <h4 className='display-4 text-center'>Add Project Task</h4>
+              <p className='lead text-center'>Project Name + Project Code</p>
               <form onSubmit={this.onSubmit}>
-                <div className="form-group">
+                <div className='form-group'>
                   <input
-                    type="text"
+                    type='text'
                     className={classnames("form-control form-control-lg", {
-                      "is-invalid": errors.summary
+                      "is-invalid": errors.summary,
                     })}
-                    name="summary"
-                    placeholder="Project Task summary"
+                    name='summary'
+                    placeholder='Project Task summary'
                     value={this.state.summary}
                     onChange={this.onChange}
                   />
                   {errors.summary && (
-                    <div className="invalid-feedback">{errors.summary}</div>
+                    <div className='invalid-feedback'>{errors.summary}</div>
                   )}
                 </div>
-                <div className="form-group">
+                <div className='form-group'>
                   <textarea
-                    className={classnames("form-control form-control-lg", {
-                      "is-invalid": errors.acceptanceCriteria
-                    })}
-                    placeholder="Acceptance Criteria"
-                    name="acceptanceCriteria"
+                    className='form-control form-control-lg'
+                    placeholder='Acceptance Criteria'
+                    name='acceptanceCriteria'
                     value={this.state.acceptanceCriteria}
                     onChange={this.onChange}
-                  ></textarea>
-                  {errors.acceptanceCriteria && (
-                    <div className="invalid-feedback">
-                      {errors.acceptanceCriteria}
-                    </div>
-                  )}
+                  />
                 </div>
                 <h6>Due Date</h6>
-                <div className="form-group">
+                <div className='form-group'>
                   <input
-                    type="date"
-                    className={classnames("form-control form-control-lg", {
-                      "is-invalid": errors.dueDate
-                    })}
-                    name="dueDate"
+                    type='date'
+                    className='form-control form-control-lg'
+                    name='dueDate'
                     value={this.state.dueDate}
                     onChange={this.onChange}
                   />
-                  {errors.dueDate && (
-                    <div className="invalid-feedback">{errors.dueDate}</div>
-                  )}
                 </div>
-                <div className="form-group">
+                <div className='form-group'>
                   <select
-                    className={classnames("form-control form-control-lg", {
-                      "is-invalid": errors.priority
-                    })}
-                    name="priority"
+                    className='form-control form-control-lg'
+                    name='priority'
                     value={this.state.priority}
                     onChange={this.onChange}
                   >
@@ -128,34 +112,25 @@ class AddProjectTask extends Component {
                     <option value={2}>Medium</option>
                     <option value={3}>Low</option>
                   </select>
-                  {errors.priority && (
-                    <div className="invalid-feedback">{errors.priority}</div>
-                  )}
                 </div>
 
-                <div className="form-group">
+                <div className='form-group'>
                   <select
-                    className={classnames("form-control form-control-lg", {
-                      "is-invalid": errors.status
-                    })}
-                    name="status"
+                    className='form-control form-control-lg'
+                    name='status'
                     value={this.state.status}
                     onChange={this.onChange}
                   >
-                    <option value="">Select Status</option>
-                    <option value="TO_DO">TO DO</option>
-                    <option value="IN_PROGRESS">IN PROGRESS</option>
-                    <option value="DONE">DONE</option>
+                    <option value=''>Select Status</option>
+                    <option value='TO_DO'>TO DO</option>
+                    <option value='IN_PROGRESS'>IN PROGRESS</option>
+                    <option value='DONE'>DONE</option>
                   </select>
-
-                  {errors.status && (
-                    <div className="invalid-feedback">{errors.status}</div>
-                  )}
                 </div>
 
                 <input
-                  type="submit"
-                  className="btn btn-primary btn-block mt-4"
+                  type='submit'
+                  className='btn btn-primary btn-block mt-4'
                 />
               </form>
             </div>
@@ -166,16 +141,16 @@ class AddProjectTask extends Component {
   }
 }
 
-AddProjectTask.protoTypes = {
+AddProjectTask.propTypes = {
   addProjectTask: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
-  errors: state.errors
+  errors: state.errors,
 });
 
 export default connect(
   mapStateToProps,
-  { addProjectTask }
+  { addProjectTask },
 )(AddProjectTask);
